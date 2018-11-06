@@ -8,7 +8,6 @@ from threading import Thread, RLock
 ## performed over network multiple and without shared resource
 ## Todo pipes and queues
 
-
 if __name__ == '__main__':
 	inputs=np.array([[1,1,1],[1,1,0],[1,0,1],[0,1,1],[1,0,0],[0,1,0],[0,0,1],[0,0,0]])
 	outputs=np.array([1,1,1,0,1,0,0,0])
