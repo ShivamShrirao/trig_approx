@@ -17,6 +17,7 @@ rg,nrons=np.random.randint(10,40),np.random.randint(10,50)
 # rg,nrons=39,44
 X = np.array([[np.random.uniform(0,np.pi*2)] for i in range(rg)])
 # X[1]=np.pi/6
+# y = np.sin(X)
 y = np.cos(X)
 
 class neural_net:
@@ -38,7 +39,6 @@ class neural_net:
 		return (1-x**2)
 
 	def think(self, X):
-		X	= X
 		z 		= (np.dot(X,self.w1)+self.b1)
 		z=z/100
 		self.a 	= np.tanh(z)
@@ -64,7 +64,7 @@ class neural_net:
 			if (i>1400) and qet:
 				if (not i%1000):
 					plt.plot(x*180/np.pi, nn.think(x), color= "pink")
-					# print('\rProgress: ',i*100/iterations,' %',end='')
+					print('\rProgress:',i*100/iterations,' %',end='')
 			elif qet:
 				if (not i%10) and (i<100):
 					plt.plot(x*180/np.pi, nn.think(x), color= "yellow")
@@ -77,6 +77,7 @@ class neural_net:
 nn = neural_net(X,y)
 x = np.arange(0,np.pi*2,0.01)
 x = x.reshape(x.shape[0],1)
+# y2 = np.sin(x)
 y2 = np.cos(x)
 if qet:
 	plt.plot(x*180/np.pi, nn.think(x), color= "yellow")
@@ -101,17 +102,17 @@ if qet:
 	plt.plot(x*180/np.pi, y2, color= "green")
 	plt.plot(x*180/np.pi, nn.think(x), color= "red")
 nn.cost=((y2-nn.think(x))**2).mean()*10
-print(sd,rg,nrons,"Cost:",nn.cost)
-with open('saves/sine_tanh.dt','r') as f:
-	pr_c = f.readlines()[1]
-if nn.cost < float(pr_c):
-	red = '\033[91m'
-	end = '\033[0m'
-	print(red+"Found !"+end)
-	with open('saves/sine_tanh.dt','w') as f:
-		f.write(str(sd)+'\n'+str(nn.cost))
-	with open('saves/sine_tanh.w8s','w') as f:
-		f.write(str(nn.w1)+'\n'+str(nn.b1)+'\n'+str(nn.w2)+'\n'+str(nn.b2))
+print("Cost:",nn.cost)
+# with open('saves/sine_tanh.dt','r') as f:
+	# pr_c = f.readlines()[1]
+# if nn.cost < float(pr_c):
+	# red = '\033[91m'
+	# end = '\033[0m'
+	# print(red+"Found !"+end)
+	# with open('saves/sine_tanh.dt','w') as f:
+	# 	f.write(str(sd)+'\n'+str(nn.cost))
+	# with open('saves/sine_tanh.w8s','w') as f:
+	# 	f.write(str(nn.w1)+'\n'+str(nn.b1)+'\n'+str(nn.w2)+'\n'+str(nn.b2))
 
 if qet:
 	plt.scatter(sd, nn.think(sd), color= "blue", marker= "*") 

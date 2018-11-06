@@ -51,8 +51,8 @@ class neural_net:
 			self.b1+=d_c_b1
 			self.w2+=d_c_w2
 			self.b2+=d_c_b2
-			# if not i%100:
-				# print('\rProgress: ',i*100/iterations,' %',end='')
+			if not i%100:
+				print('\rProgress:',i*100/iterations,' %',end='')
 		print()
 		self.cost=((self.y-self.out)**2).sum()
 
@@ -63,10 +63,7 @@ plt.plot(x*180/np.pi, nn.think(x), color= "yellow")
 t=time()
 nn.train(X,y,100000)
 print("Time:",(time()-t))
-print(sd,rg,nrons,"Cost:",nn.cost)
-print(nn.think(0))
-print(nn.think(np.pi/6))
-print(nn.think(np.pi/2))
+print("Cost:",nn.cost)
 y = np.sin(x)
 plt.plot(x*180/np.pi, y, color= "green")
 plt.plot(x*180/np.pi, nn.think(x), color= "red")
