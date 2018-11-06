@@ -6,7 +6,7 @@ from multiprocessing import Pool, Array, RLock
 
 ## Threads slow due to GIL in cpu intensive, shared but good for more I/O
 ## Processes pool works excellent. superfast. Resource in shared memory.
-## Might be even faster without shared resource
+## Might be even faster without shared resource.
 
 inputs=np.array([[1,1,1],[1,1,0],[1,0,1],[0,1,1],[1,0,0],[0,1,0],[0,0,1],[0,0,0]])
 outputs=np.array([1,1,1,0,1,0,0,0])
