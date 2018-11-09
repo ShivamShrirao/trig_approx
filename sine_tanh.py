@@ -13,12 +13,12 @@ except:
 
 qet=1
 np.random.seed(sd)
-rg,nrons=np.random.randint(10,40),np.random.randint(10,50)
+rg,nrons=np.random.randint(10,40),np.random.randint(15,50)
 # rg,nrons=39,44
-X = np.array([[np.random.uniform(0,np.pi*2)] for i in range(rg)])
+X = np.array([[np.random.uniform(0,np.pi*2)] for i in range(100)])
 # X[1]=np.pi/6
 # y = np.sin(X)
-y = np.cos(X)
+y = np.sin(X)
 
 class neural_net:
 	def __init__(self, X, y):
@@ -78,41 +78,24 @@ nn = neural_net(X,y)
 x = np.arange(0,np.pi*2,0.01)
 x = x.reshape(x.shape[0],1)
 # y2 = np.sin(x)
-y2 = np.cos(x)
+y2 = np.sin(x)
 if qet:
 	plt.plot(x*180/np.pi, nn.think(x), color= "yellow")
 
 t=time()
-if 1:
-	nn.train(X,y,100000)
-else:
-	with open('saves/sine_tanh.w8s','r') as f:
-		wheys=f.read()
-		wheys=wheys.split('\n')
-		nn.w1=wheys[0]
-		nn.b1=wheys[1]
-		nn.w2=wheys[2]
-		nn.b2=wheys[3]
-		nn.train(X,y,1)
+nn.train(X,y,100000)
+nn.train(X,y,100000)
+nn.train(X,y,100000)
+nn.train(X,y,100000)
+nn.train(X,y,100000)
 
 print("Time:",(time()-t))
 
-# print(nn.mal)
 if qet:
 	plt.plot(x*180/np.pi, y2, color= "green")
 	plt.plot(x*180/np.pi, nn.think(x), color= "red")
 nn.cost=((y2-nn.think(x))**2).mean()*10
 print("Cost:",nn.cost)
-# with open('saves/sine_tanh.dt','r') as f:
-	# pr_c = f.readlines()[1]
-# if nn.cost < float(pr_c):
-	# red = '\033[91m'
-	# end = '\033[0m'
-	# print(red+"Found !"+end)
-	# with open('saves/sine_tanh.dt','w') as f:
-	# 	f.write(str(sd)+'\n'+str(nn.cost))
-	# with open('saves/sine_tanh.w8s','w') as f:
-	# 	f.write(str(nn.w1)+'\n'+str(nn.b1)+'\n'+str(nn.w2)+'\n'+str(nn.b2))
 
 if qet:
 	plt.scatter(sd, nn.think(sd), color= "blue", marker= "*") 
